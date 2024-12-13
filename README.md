@@ -3,8 +3,10 @@
 
 ## Description
 Le projet "Dice" est une application construite avec Spring Boot permettant de simuler des lancés de dés et de gérer un historique des résultats en base de données. Les fonctionnalités liées aux lancés et aux logs sont maintenant séparées dans deux contrôleurs distincts :
-- `DiceController` : Gère les actions liées aux dés.
-- `DiceLogController` : Gère l'historique des lancés.
+- **`DiceController`** : Gère les actions liées aux dés.
+- **`DiceLogController`** : Gère l'historique des lancés.
+
+L'application intègre également une gestion centralisée des erreurs pour une expérience utilisateur améliorée.
 
 ---
 
@@ -14,6 +16,7 @@ Le projet "Dice" est une application construite avec Spring Boot permettant de s
 - Enregistrer les résultats des lancés dans une base de données (H2).
 - Consulter l'historique complet des lancés via une API REST.
 - Documentation interactive de l'API avec Swagger.
+- Gestion centralisée des erreurs HTTP.
 
 ---
 
@@ -65,6 +68,7 @@ Le projet "Dice" est une application construite avec Spring Boot permettant de s
 - **`DiceRollLog`** : Entité JPA modélisant un historique de lancer.
 - **`DiceService`** : Service Spring contenant la logique métier.
 - **`DiceRollLogRepository`** : Repository JPA pour gérer les interactions avec la base de données.
+- **`GlobalExceptionHandler`** : Gestionnaire global pour centraliser la gestion des erreurs HTTP.
 
 ---
 
@@ -81,6 +85,43 @@ spring.datasource.username=sa
 spring.datasource.password=
 spring.h2.console.enabled=true
 spring.jpa.hibernate.ddl-auto=update
+```
+
+---
+
+## Gestion des erreurs
+L'application intègre un gestionnaire global des erreurs via la classe `GlobalExceptionHandler`. Ce gestionnaire permet d'intercepter les exceptions levées par l'application et de renvoyer des réponses JSON personnalisées.
+
+### **Erreurs prises en charge :**
+
+1. **404 Not Found** :
+   - Gérée lorsqu'une URL demandée n'existe pas.
+   - Exemple de réponse JSON :
+     ```json
+     {
+         "timestamp": "2024-12-13T14:00:00",
+         "status": 404,
+         "error": "Not Found",
+         "message": "L'URL demandée est introuvable : /api/invalid-endpoint"
+     }
+     ```
+
+2. **500 Internal Server Error** :
+   - Gérée pour toutes les exceptions non spécifiques ou génériques.
+   - Exemple de réponse JSON :
+     ```json
+     {
+         "timestamp": "2024-12-13T14:05:00",
+         "status": 500,
+         "error": "Internal Server Error",
+         "message": "Une erreur inattendue s'est produite."
+     }
+     ```
+
+### **Configuration associée**
+Ajoutez cette propriété dans `application.properties` pour activer la gestion des erreurs 404 :
+```properties
+spring.web.resources.add-mappings=false
 ```
 
 ---
@@ -103,7 +144,7 @@ Le projet utilise **Lombok** pour réduire le code boilerplate. Installez le plu
 ## Améliorations possibles
 - Ajout de tests unitaires et d'intégration.
 - Ajout de fonctionnalités pour personnaliser les dés (nombre de faces).
-- Mise en place d'une gestion avancée des erreurs (exception handler global).
+- Amélioration de la gestion des erreurs (messages plus détaillés).
 
 ---
 
