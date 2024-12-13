@@ -72,10 +72,6 @@ L'application intègre également une gestion centralisée des erreurs pour une 
 
 ---
 
-## Base de données
-L'application utilise une base de données H2 en mémoire pour stocker les historiques. Vous pouvez accéder à la console H2 à l'adresse suivante :  
-[http://localhost:8081/h2-console](http://localhost:8081/h2-console)  
-
 ### Configuration de la base
 Les paramètres de connexion par défaut sont définis dans `application.properties` :
 ```properties
