@@ -12,10 +12,10 @@ public class Dice {
         this.random = new Random();
     }
 
-    public int roll(int sides) {
-        if (sides <= 0) {
+    public int roll(int faces) {
+        if (faces <= 0) {
             throw new IllegalArgumentException("Le nombre de faces doit être supérieur à 0.");
         }
-        return random.nextInt(sides) + 1;
+        return random.nextInt(faces) + 1;
     }
 }
