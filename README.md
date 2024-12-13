@@ -122,4 +122,4 @@ La documentation interactive Swagger est générée automatiquement via SpringDo
 ---
 
 ## Auteur
-Projet réalisé dans le cadre de [l'assignement GitHub Classroom](https://classroom.github.com/a/dnW0dm4q).
+Projet réalisé dans le cadre de [l'assignement GitHub Classroom](https://github.com/Master1-MIAGE-UCA/oil-td-spring-Nassco.git).
